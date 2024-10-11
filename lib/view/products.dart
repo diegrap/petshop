@@ -119,7 +119,7 @@ class _ProductsState extends State<Products> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -128,9 +128,20 @@ class _ProductsState extends State<Products> {
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_outline),
+            label: 'Suporte', // Adiciona o ícone de suporte
+          ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushNamed(context, '/');
+          } else if (index == 1) {
+            Navigator.pushNamed(context, '/user_profile');
+          } else if (index == 2) {
+            Navigator.pushNamed(context, '/support');
+          }
+        },
       ),
     );
   }

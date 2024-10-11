@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petshop_final/view/products.dart';
+import 'package:petshop_final/view/profile_update_screen.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -109,14 +110,20 @@ class _UserProfileState extends State<UserProfile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Botão de Editar
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Ação de editar perfil
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              EditUserProfile()), // Redireciona para a tela de edição
+                    );
                   },
                   icon: Icon(Icons.edit),
                   label: Text("Editar"),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF212121), // Cor do botão
+                    backgroundColor: Color(0xFFC38D4C), // Cor laranja do botão
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
@@ -125,7 +132,9 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 SizedBox(width: 20), // Espaço entre os botões
                 ElevatedButton.icon(
-                  onPressed: _onLogout,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/');
+                  },
                   icon: Icon(Icons.logout),
                   label: Text("Sair"),
                   style: ElevatedButton.styleFrom(
@@ -142,7 +151,7 @@ class _UserProfileState extends State<UserProfile> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -151,10 +160,20 @@ class _UserProfileState extends State<UserProfile> {
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_outline),
+            label: 'Suporte', // Adiciona o ícone de suporte
+          ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFFC38D4C),
-        onTap: _onItemTapped,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushNamed(context, '/');
+          } else if (index == 1) {
+            Navigator.pushNamed(context, '/user_profile');
+          } else if (index == 2) {
+            Navigator.pushNamed(context, '/support');
+          }
+        },
       ),
     );
   }

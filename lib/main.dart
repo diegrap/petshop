@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petshop_final/bloc/manage_bloc.dart';
-import 'view/registerpage.dart'; // Página de registro
-import 'view/loginpage.dart'; // Página de login
-import 'view/products.dart'; // Página de produtos
+import 'view/registerpage.dart';
+import 'view/loginpage.dart';
+import 'view/products.dart';
 import 'view/shopping_cart.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'view/user_profile.dart';
+import 'view/support_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ManageBloc(InsertState(registerList: [])),
         ),
-        // Adicione outros BlocProviders aqui se necessário
       ],
       child: MaterialApp(
         title: 'PetData',
@@ -42,18 +42,16 @@ class MyApp extends StatelessWidget {
         ),
         home: MyHomePage(),
         routes: {
-          '/user_profile': (context) =>
-              UserProfile(), // Página de perfil do usuário
-          '/shopping_cart': (context) =>
-              ShoppingCartPage(), // Página do carrinho
+          '/user_profile': (context) => UserProfile(),
+          '/login': (context) => LoginPage(),
+          '/shopping_cart': (context) => ShoppingCartPage(),
           '/register': (context) => BlocProvider.value(
                 value: BlocProvider.of<ManageBloc>(context),
-                child: RegisterPage(), // Envolve RegisterPage com BlocProvider
+                child: RegisterPage(),
               ),
           '/products': (context) => Products(),
-          '/login': (context) => LoginPage(), // Adiciona rota para LoginPage
-          '/shopping_cart': (context) =>
-              ShoppingCartPage(), // Adiciona rota para ShoppingCartPage
+          '/login': (context) => LoginPage(),
+          '/support': (context) => Tela3(),
         },
       ),
     );
