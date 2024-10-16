@@ -8,8 +8,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  int _selectedIndex = 1;
-
   void _onItemTapped(int index) {
     if (index == 0) {
       Navigator.pushReplacement(
@@ -54,22 +52,28 @@ class _UserProfileState extends State<UserProfile> {
                       AssetImage('assets/images/user_placeholder.png'),
                 ),
                 SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nome do Usuário",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  // Ajusta o conteúdo ao espaço disponível
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nome do Usuário",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow
+                            .ellipsis, // Limita o texto se ultrapassar o espaço
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Bio: Descrição breve do usuário",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                      Text(
+                        "Bio: Descrição breve do usuário",
+                        style: TextStyle(color: Colors.grey),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -167,7 +171,7 @@ class _UserProfileState extends State<UserProfile> {
         ],
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushNamed(context, '/');
+            Navigator.pushNamed(context, '/products');
           } else if (index == 1) {
             Navigator.pushNamed(context, '/user_profile');
           } else if (index == 2) {
@@ -188,9 +192,14 @@ class _UserProfileState extends State<UserProfile> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           SizedBox(width: 10), // Espaçamento entre label e valor
-          Text(
-            value,
-            style: TextStyle(fontSize: 16),
+          Flexible(
+            // Ajusta o valor ao espaço disponível
+            child: Text(
+              value,
+              style: TextStyle(fontSize: 16),
+              overflow: TextOverflow
+                  .ellipsis, // Limita o texto se ultrapassar o espaço
+            ),
           ),
         ],
       ),

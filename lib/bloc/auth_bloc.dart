@@ -8,7 +8,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc() : super(Unauthenticated());
 
-  @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is AuthServerEvent) {
       if (event.userModel == null) {

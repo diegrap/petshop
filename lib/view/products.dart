@@ -10,6 +10,7 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
+  // ignore: unused_field
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -108,7 +109,7 @@ class _ProductsState extends State<Products> {
                 CategoryCard(
                   title: 'Higiene',
                   description: 'Descrição de Higiene',
-                  imageUrl: 'assets/images/higiene.png',
+                  imageUrl: 'assets/images/higiene.jpeg',
                   onTap: () {
                     // Implemente a ação desejada
                   },
@@ -135,7 +136,7 @@ class _ProductsState extends State<Products> {
         ],
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushNamed(context, '/');
+            Navigator.pushNamed(context, '/products');
           } else if (index == 1) {
             Navigator.pushNamed(context, '/user_profile');
           } else if (index == 2) {

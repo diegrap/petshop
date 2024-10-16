@@ -35,11 +35,14 @@ flutter:
     - assets/images/acessorios.jpeg
     - assets/images/brinquedos.png
     - assets/images/remedios.png
+    - assets/images/higiene.jpeg
     - assets/images/racao.jpg
     - assets/images/biscoito.jpg
     - assets/images/pate.jpg
     - assets/images/sache.jpg
     - assets/images/sticks.jpg
+    - assets/images/user_placeholder.png
+    - assets/images/pet_placeholder.png
     - assets/credentials.json
 
   # fonts:

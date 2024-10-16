@@ -10,8 +10,6 @@ class Alimenticio extends StatefulWidget {
 }
 
 class _AlimenticioState extends State<Alimenticio> {
-  int _selectedIndex = 0;
-
   void _onItemTapped(int index) {
     if (index == 0) {
       Navigator.pushReplacement(
@@ -129,7 +127,7 @@ class _AlimenticioState extends State<Alimenticio> {
         ],
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushNamed(context, '/');
+            Navigator.pushNamed(context, '/products');
           } else if (index == 1) {
             Navigator.pushNamed(context, '/user_profile');
           } else if (index == 2) {

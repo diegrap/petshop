@@ -50,7 +50,6 @@ class MyApp extends StatelessWidget {
                 child: RegisterPage(),
               ),
           '/products': (context) => Products(),
-          '/login': (context) => LoginPage(),
           '/support': (context) => Tela3(),
         },
       ),
