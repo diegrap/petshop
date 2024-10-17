@@ -14,14 +14,11 @@ class _UserProfileState extends State<UserProfile> {
         context,
         MaterialPageRoute(builder: (context) => Products()),
       );
-    } else if (index == 1) {
-      // Já está na tela de perfil
-    }
+    } else if (index == 1) {}
   }
 
   void _onLogout() {
-    // Ação de logout
-    Navigator.pop(context); // Exemplo de sair da tela
+    Navigator.pop(context);
   }
 
   @override
@@ -33,9 +30,7 @@ class _UserProfileState extends State<UserProfile> {
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {
-              // Ação de configurações
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -43,7 +38,6 @@ class _UserProfileState extends State<UserProfile> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Informações do Usuário no topo
             Row(
               children: [
                 CircleAvatar(
@@ -53,7 +47,6 @@ class _UserProfileState extends State<UserProfile> {
                 ),
                 SizedBox(width: 20),
                 Expanded(
-                  // Ajusta o conteúdo ao espaço disponível
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -63,8 +56,7 @@ class _UserProfileState extends State<UserProfile> {
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
-                        overflow: TextOverflow
-                            .ellipsis, // Limita o texto se ultrapassar o espaço
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 10),
                       Text(
@@ -78,12 +70,9 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
             SizedBox(height: 30),
-
-            // Informações do Pet à Esquerda e Imagem à Direita
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Coluna com labels e valores à esquerda
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +88,6 @@ class _UserProfileState extends State<UserProfile> {
                     ],
                   ),
                 ),
-
-                // Imagem do pet à direita
                 CircleAvatar(
                   radius: 50,
                   backgroundImage:
@@ -109,32 +96,28 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
             SizedBox(height: 30),
-
-            // Botões Editar e Sair
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Botão de Editar
                 ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              EditUserProfile()), // Redireciona para a tela de edição
+                          builder: (context) => EditUserProfile()),
                     );
                   },
                   icon: Icon(Icons.edit),
                   label: Text("Editar"),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFC38D4C), // Cor laranja do botão
+                    backgroundColor: Color(0xFFC38D4C),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
                 ),
-                SizedBox(width: 20), // Espaço entre os botões
+                SizedBox(width: 20),
                 ElevatedButton.icon(
                   onPressed: () {
                     Navigator.pushNamed(context, '/');
@@ -142,7 +125,7 @@ class _UserProfileState extends State<UserProfile> {
                   icon: Icon(Icons.logout),
                   label: Text("Sair"),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent, // Cor do botão de sair
+                    backgroundColor: Colors.redAccent,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
@@ -166,7 +149,7 @@ class _UserProfileState extends State<UserProfile> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.help_outline),
-            label: 'Suporte', // Adiciona o ícone de suporte
+            label: 'Suporte',
           ),
         ],
         onTap: (index) {
@@ -191,14 +174,12 @@ class _UserProfileState extends State<UserProfile> {
             label,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          SizedBox(width: 10), // Espaçamento entre label e valor
+          SizedBox(width: 10),
           Flexible(
-            // Ajusta o valor ao espaço disponível
             child: Text(
               value,
               style: TextStyle(fontSize: 16),
-              overflow: TextOverflow
-                  .ellipsis, // Limita o texto se ultrapassar o espaço
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

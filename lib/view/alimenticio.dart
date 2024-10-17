@@ -3,7 +3,7 @@ import 'package:petshop_final/view/user_profile.dart';
 import 'package:petshop_final/view/products.dart';
 
 class Alimenticio extends StatefulWidget {
-  final List<String> cartItems = []; // Lista de itens do carrinho
+  final List<String> cartItems = [];
 
   @override
   _AlimenticioState createState() => _AlimenticioState();
@@ -122,7 +122,7 @@ class _AlimenticioState extends State<Alimenticio> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.help_outline),
-            label: 'Suporte', // Adiciona o ícone de suporte
+            label: 'Suporte',
           ),
         ],
         onTap: (index) {

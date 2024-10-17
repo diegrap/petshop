@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petshop_final/bloc/manage_bloc.dart';
-import 'alimenticio.dart'; // Certifique-se de importar corretamente o widget Alimenticio
+import 'alimenticio.dart';
 import 'package:petshop_final/view/user_profile.dart';
 
 class Products extends StatefulWidget {
@@ -84,7 +84,7 @@ class _ProductsState extends State<Products> {
                   description: 'Descrição das Acessórios',
                   imageUrl: 'assets/images/acessorios.jpeg',
                   onTap: () {
-                    // Implemente a ação desejada
+                    //
                   },
                 ),
                 SizedBox(height: 16),
@@ -93,7 +93,7 @@ class _ProductsState extends State<Products> {
                   description: 'Descrição de Brinquedo',
                   imageUrl: 'assets/images/brinquedos.png',
                   onTap: () {
-                    // Implemente a ação desejada
+                    //
                   },
                 ),
                 SizedBox(height: 16),
@@ -102,7 +102,7 @@ class _ProductsState extends State<Products> {
                   description: 'Descrição de Remédio',
                   imageUrl: 'assets/images/remedios.png',
                   onTap: () {
-                    // Implemente a ação desejada
+                    //
                   },
                 ),
                 SizedBox(height: 16),
@@ -111,7 +111,7 @@ class _ProductsState extends State<Products> {
                   description: 'Descrição de Higiene',
                   imageUrl: 'assets/images/higiene.jpeg',
                   onTap: () {
-                    // Implemente a ação desejada
+                    //
                   },
                 ),
               ],
@@ -131,7 +131,7 @@ class _ProductsState extends State<Products> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.help_outline),
-            label: 'Suporte', // Adiciona o ícone de suporte
+            label: 'Suporte', //
           ),
         ],
         onTap: (index) {
