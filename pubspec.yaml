@@ -41,6 +41,11 @@ flutter:
     - assets/images/pate.jpg
     - assets/images/sache.jpg
     - assets/images/sticks.jpg
+    - assets/images/coleira.jpg
+    - assets/images/guia.jpg
+    - assets/images/casinha.jpg
+    - assets/images/coberta.jpg
+    - assets/images/escova.jpg
     - assets/images/user_placeholder.png
     - assets/images/pet_placeholder.png
     - assets/credentials.json

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petshop_final/bloc/manage_bloc.dart';
 import 'alimenticio.dart';
+import 'acessorio.dart';
 import 'package:petshop_final/view/user_profile.dart';
 
 class Products extends StatefulWidget {
@@ -84,7 +85,12 @@ class _ProductsState extends State<Products> {
                   description: 'Descrição das Acessórios',
                   imageUrl: 'assets/images/acessorios.jpeg',
                   onTap: () {
-                    //
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Acessorios(),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(height: 16),
