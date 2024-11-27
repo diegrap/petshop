@@ -6,40 +6,48 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FirebaseAuthenticationService _authenticationService =
       FirebaseAuthenticationService();
 
-  AuthBloc() : super(Unauthenticated());
-
-  Stream<AuthState> mapEventToState(AuthEvent event) async* {
-    if (event is AuthServerEvent) {
+  AuthBloc() : super(Unauthenticated()) {
+    on<AuthServerEvent>((event, emit) {
       if (event.userModel == null) {
-        yield Unauthenticated();
+        emit(Unauthenticated());
       } else {
-        // Ajuste necessário para FirestoreDatabase
         // FirestoreDatabase.helper.uid = event.userModel!.uid;
-        yield Authenticated(userModel: event.userModel!);
+        emit(Authenticated(userModel: event.userModel!));
       }
-    } else if (event is RegisterUser) {
+    });
+
+    on<RegisterUser>((event, emit) async {
       try {
         await _authenticationService.createUserWithEmailAndPassword(
-            event.username, event.password);
+          event.email,
+          event.password,
+          event.name,
+        );
+        emit(RegistrationSuccess(message: "Cadastro realizado com sucesso!"));
       } catch (e) {
-        yield AuthError(message: "Impossível Registrar: ${e.toString()}");
+        emit(AuthError(message: "Impossível Registrar: ${e.toString()}"));
       }
-    } else if (event is LoginUser) {
+    });
+
+    on<LoginUser>((event, emit) async {
       try {
         await _authenticationService.signInWithEmailAndPassword(
-            event.username, event.password);
+            event.email, event.password);
+        emit(Unauthenticated());
       } catch (e) {
-        yield AuthError(
-            message: "Impossível Logar com ${event.username}: ${e.toString()}");
+        emit(AuthError(
+            message: "Impossível Logar com ${event.email}: ${e.toString()}"));
       }
-    } else if (event is Logout) {
+    });
+
+    on<Logout>((event, emit) async {
       try {
         await _authenticationService.signOut();
-        yield Unauthenticated();
+        emit(Unauthenticated());
       } catch (e) {
-        yield AuthError(message: "Impossível Efetuar Logout: ${e.toString()}");
+        emit(AuthError(message: "Impossível Efetuar Logout: ${e.toString()}"));
       }
-    }
+    });
   }
 }
 
@@ -47,17 +55,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 abstract class AuthEvent {}
 
 class RegisterUser extends AuthEvent {
-  String username;
+  String name;
+  String email;
   String password;
 
-  RegisterUser({required this.username, required this.password});
+  RegisterUser(
+      {required this.name, required this.email, required this.password});
 }
 
 class LoginUser extends AuthEvent {
-  String username;
+  String email;
   String password;
 
-  LoginUser({required this.username, required this.password});
+  LoginUser({required this.email, required this.password});
 }
 
 class LoginAnonymousUser extends AuthEvent {}
@@ -73,6 +83,11 @@ class AuthServerEvent extends AuthEvent {
 abstract class AuthState {}
 
 class Unauthenticated extends AuthState {}
+
+class RegistrationSuccess extends AuthState {
+  final String message;
+  RegistrationSuccess({required this.message});
+}
 
 class Authenticated extends AuthState {
   final UserModel userModel;

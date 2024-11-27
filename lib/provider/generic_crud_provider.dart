@@ -23,6 +23,8 @@ class GenericCrudProvider {
     database[key] = register;
     numInsertions++;
     _controller.sink.add(key);
+
+    print("Usuário registrado: ${register.toMap()}"); // Verifique os dados aqui
     return key;
   }
 
@@ -53,14 +55,23 @@ class GenericCrudProvider {
   }
 
   // Método de login de usuário
-  static Future<RegisterUser> loginUser(String email, String senha) async {
-    // Simular um processo de login simples
-    // Verificar se o usuário existe no banco de dados simulado
-    var user = database.values.firstWhere(
-      (user) => user.email == email && user.senha == senha,
-      orElse: () => throw Exception("Credenciais inválidas"),
-    );
-    return user;
+  static Future<RegisterUser?> loginUser(String email, String senha) async {
+    print(
+        "Tentando fazer login com o email: $email e senha: $senha"); // Verifique os dados recebidos
+
+    try {
+      var user = database.values.firstWhere(
+        (user) => user.email == email && user.senha == senha,
+        orElse: () => throw Exception("Credenciais inválidas"),
+      );
+
+      print(
+          "Usuário encontrado: ${user.toMap()}"); // Verifique os dados do usuário encontrado
+      return user;
+    } catch (e) {
+      print("Erro ao tentar encontrar o usuário: $e"); // Log de erro
+      throw Exception("Credenciais inválidas");
+    }
   }
 
   // Fechar o stream quando não for mais necessário

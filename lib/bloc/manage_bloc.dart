@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../provider/generic_crud_provider.dart';
 import '../model/registeruser.dart';
 
+// Define o BLoC para gerenciar os eventos de login e autenticação
 class ManageBloc extends Bloc<ManageEvent, ManageState> {
   ManageBloc(ManageState initialState) : super(initialState) {
     GenericCrudProvider.stream.listen((userId) {
@@ -53,18 +54,21 @@ class ManageBloc extends Bloc<ManageEvent, ManageState> {
       }
     });
 
+    // Evento de login
     on<LoginUser>((event, emit) async {
       try {
-        RegisterUser user =
+        RegisterUser? user =
             await GenericCrudProvider.loginUser(event.email, event.senha);
 
-        if (user.userId.isEmpty) {
-          emit(AuthError(message: "Usuário não cadastrado"));
+        if (user == null || user.userId.isEmpty) {
+          emit(LoginError(
+              message: "Usuário não encontrado ou credenciais inválidas"));
         } else {
           print("Login bem-sucedido: ${user.email}");
+          emit(LoginSuccess(user: user)); // Emitindo LoginSuccess
         }
       } catch (e) {
-        emit(AuthError(message: "Erro de login: $e"));
+        emit(LoginError(message: "Erro de login: $e"));
       }
     });
   }
@@ -110,6 +114,16 @@ class UpdateState extends ManageState {
   String userId;
   List<RegisterUser> registerList;
   UpdateState({required this.userId, required this.registerList});
+}
+
+class LoginSuccess extends ManageState {
+  final RegisterUser user;
+  LoginSuccess({required this.user});
+}
+
+class LoginError extends ManageState {
+  final String message;
+  LoginError({required this.message});
 }
 
 class Authenticated extends ManageState {

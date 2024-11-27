@@ -13,13 +13,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-      apiKey: "AIzaSyCCJxCugr4lYcZuu3wCd6_-7x248cjBdDc",
-      authDomain: "petshop-a6de8.firebaseapp.com",
-      projectId: "petshop-a6de8",
-      storageBucket: "petshop-a6de8.appspot.com",
-      messagingSenderId: "893258695402",
-      appId: "1:893258695402:web:425a80972d8e1b128c4d93",
-    ),
+        apiKey: "AIzaSyCCJxCugr4lYcZuu3wCd6_-7x248cjBdDc",
+        authDomain: "petshop-a6de8.firebaseapp.com",
+        databaseURL: "https://petshop-a6de8-default-rtdb.firebaseio.com",
+        projectId: "petshop-a6de8",
+        storageBucket: "petshop-a6de8.firebasestorage.app",
+        messagingSenderId: "893258695402",
+        appId: "1:893258695402:web:425a80972d8e1b128c4d93"),
   );
   runApp(MyApp());
 }

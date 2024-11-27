@@ -99,10 +99,10 @@ class RegisterPage extends StatelessWidget {
                           email.isNotEmpty &&
                           senha.isNotEmpty) {
                         UserModel? user = await authService
-                            .createUserWithEmailAndPassword(email, senha);
+                            .createUserWithEmailAndPassword(nome, email, senha);
                         if (user != null) {
                           // Sucesso no registro, navega para a tela de produtos
-                          Navigator.pushReplacementNamed(context, '/products');
+                          Navigator.pushReplacementNamed(context, '/login');
                         } else {
                           // Falha no registro, exibir mensagem de erro
                           ScaffoldMessenger.of(context).showSnackBar(
