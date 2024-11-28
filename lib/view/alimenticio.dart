@@ -3,7 +3,7 @@ import 'package:petshop_final/view/user_profile.dart';
 import 'package:petshop_final/view/products.dart';
 
 class Alimenticio extends StatefulWidget {
-  final List<String> cartItems = [];
+  final Map<String, int> cartItems = {}; // Mapeia os itens com quantidade
 
   @override
   _AlimenticioState createState() => _AlimenticioState();
@@ -65,7 +65,7 @@ class _AlimenticioState extends State<Alimenticio> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Ração',
-              description: 'Descrição do Produto',
+              description: '5kg - RS28,00',
               imageUrl: 'assets/images/racao.jpg',
               onTap: () {
                 _addToCart(context, 'Ração');
@@ -74,7 +74,7 @@ class _AlimenticioState extends State<Alimenticio> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Biscoito',
-              description: 'Descrição do Produto',
+              description: '500g - RS10,00',
               imageUrl: 'assets/images/biscoito.jpg',
               onTap: () {
                 _addToCart(context, 'Biscoito');
@@ -83,7 +83,7 @@ class _AlimenticioState extends State<Alimenticio> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Sachê',
-              description: 'Descrição do Produto',
+              description: '100g - RS5,50',
               imageUrl: 'assets/images/sache.jpg',
               onTap: () {
                 _addToCart(context, 'Sachê');
@@ -92,7 +92,7 @@ class _AlimenticioState extends State<Alimenticio> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Patê',
-              description: 'Descrição de Produto',
+              description: '100g - RS6,00',
               imageUrl: 'assets/images/pate.jpg',
               onTap: () {
                 _addToCart(context, 'Patê');
@@ -101,7 +101,7 @@ class _AlimenticioState extends State<Alimenticio> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Stick',
-              description: 'Descrição do Produto',
+              description: '500g - RS20,00',
               imageUrl: 'assets/images/sticks.jpg',
               onTap: () {
                 _addToCart(context, 'Stick');
@@ -139,7 +139,15 @@ class _AlimenticioState extends State<Alimenticio> {
   }
 
   void _addToCart(BuildContext context, String productName) {
-    widget.cartItems.add(productName);
+    // Verifica se o produto já está no carrinho
+    if (widget.cartItems.containsKey(productName)) {
+      // Se o produto já estiver no carrinho, incrementa a quantidade
+      widget.cartItems[productName] = widget.cartItems[productName]! + 1;
+    } else {
+      // Caso contrário, adiciona o produto com quantidade 1
+      widget.cartItems[productName] = 1;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Produto $productName adicionado ao carrinho.'),

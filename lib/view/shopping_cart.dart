@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class ShoppingCartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final List<String> cartItems =
-        ModalRoute.of(context)?.settings.arguments as List<String>? ?? [];
-    final String customerName =
-        "Cliente"; // Altere para obter o nome do cliente dinamicamente, se necessário
+    // Obtém os itens do carrinho, que agora é um mapa com os produtos e suas quantidades
+    final Map<String, int> cartItems =
+        ModalRoute.of(context)?.settings.arguments as Map<String, int>? ?? {};
+    final String customerName = "Cliente";
 
     return Scaffold(
       appBar: AppBar(
@@ -36,14 +36,18 @@ class ShoppingCartPage extends StatelessWidget {
                   : ListView.builder(
                       itemCount: cartItems.length,
                       itemBuilder: (context, index) {
+                        // Lista de produtos no carrinho com a quantidade
+                        String product = cartItems.keys.toList()[index];
+                        int quantity = cartItems[product]!;
                         return Card(
                           margin: EdgeInsets.symmetric(vertical: 8.0),
                           child: ListTile(
-                            title: Text(cartItems[index]),
+                            title: Text('$product'),
+                            subtitle: Text('Quantidade: $quantity'),
                             trailing: IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () {
-                                cartItems.removeAt(index);
+                                cartItems.remove(product);
                                 Navigator.pushReplacementNamed(
                                     context, '/shopping_cart',
                                     arguments: cartItems);

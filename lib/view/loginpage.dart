@@ -10,6 +10,22 @@ class LoginPage extends StatelessWidget {
 
     GlobalKey<FormState> formKey = GlobalKey();
 
+    bool _segredo2 = true;
+
+    final String email2 = ModalRoute.of(context)!.settings.arguments as String;
+
+    if (_segredo2) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Usuário $email2 cadastrado com sucesso!'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      });
+      _segredo2 = false;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Conecte-se'),
@@ -97,22 +113,22 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
 
-                  // Botão de Entrar
+                  SizedBox(height: 20),
+
                   Container(
-                    width: double.infinity,
+                    width: double
+                        .infinity, // Isso faz o botão ocupar a largura completa disponível
                     child: ElevatedButton(
                       onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          String email = emailController.text;
-                          String senha = senhaController.text;
-                          // Emitir evento de login
-                          BlocProvider.of<ManageBloc>(context).add(
-                            LoginUser(email: email, senha: senha),
-                          );
-                        }
+                        // Ação ao pressionar o botão
+                        Navigator.pushNamed(
+                          context,
+                          '/products',
+                          arguments: emailController.text,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF212121),
+                        backgroundColor: Color(0xFFC38D4C),
                         padding: EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100),
@@ -127,33 +143,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-
-                  // Botão de Produtos (por enquanto, somente para navegação manual)
-                  Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/products');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFC38D4C),
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                      ),
-                      child: Text(
-                        'Produtos',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),

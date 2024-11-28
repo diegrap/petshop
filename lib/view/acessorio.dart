@@ -3,7 +3,7 @@ import 'package:petshop_final/view/user_profile.dart';
 import 'package:petshop_final/view/products.dart';
 
 class Acessorios extends StatefulWidget {
-  final List<String> cartItems = [];
+  final Map<String, int> cartItems = {};
 
   @override
   _AcessoriosState createState() => _AcessoriosState();
@@ -65,7 +65,7 @@ class _AcessoriosState extends State<Acessorios> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Coleira',
-              description: 'Descrição do Produto',
+              description: 'RS50,00',
               imageUrl: 'assets/images/coleira.jpg',
               onTap: () {
                 _addToCart(context, 'Coleira');
@@ -74,7 +74,7 @@ class _AcessoriosState extends State<Acessorios> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Guia',
-              description: 'Descrição do Produto',
+              description: 'RS20,00',
               imageUrl: 'assets/images/guia.jpg',
               onTap: () {
                 _addToCart(context, 'Guia');
@@ -83,7 +83,7 @@ class _AcessoriosState extends State<Acessorios> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Coberta',
-              description: 'Descrição do Produto',
+              description: 'RS20,00',
               imageUrl: 'assets/images/coberta.jpg',
               onTap: () {
                 _addToCart(context, 'Coberta');
@@ -92,7 +92,7 @@ class _AcessoriosState extends State<Acessorios> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Casinha',
-              description: 'Descrição de Produto',
+              description: 'RS75,00',
               imageUrl: 'assets/images/casinha.jpg',
               onTap: () {
                 _addToCart(context, 'Casinha');
@@ -101,7 +101,7 @@ class _AcessoriosState extends State<Acessorios> {
             SizedBox(height: 16),
             CategoryCard(
               title: 'Escova',
-              description: 'Descrição do Produto',
+              description: 'RS6,00',
               imageUrl: 'assets/images/escova.jpg',
               onTap: () {
                 _addToCart(context, 'Escova');
@@ -139,7 +139,15 @@ class _AcessoriosState extends State<Acessorios> {
   }
 
   void _addToCart(BuildContext context, String productName) {
-    widget.cartItems.add(productName);
+    // Verifica se o produto já está no carrinho
+    if (widget.cartItems.containsKey(productName)) {
+      // Se o produto já estiver no carrinho, incrementa a quantidade
+      widget.cartItems[productName] = widget.cartItems[productName]! + 1;
+    } else {
+      // Caso contrário, adiciona o produto com quantidade 1
+      widget.cartItems[productName] = 1;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Produto $productName adicionado ao carrinho.'),

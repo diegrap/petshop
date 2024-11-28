@@ -102,14 +102,16 @@ class RegisterPage extends StatelessWidget {
                             .createUserWithEmailAndPassword(nome, email, senha);
                         if (user != null) {
                           // Sucesso no registro, navega para a tela de produtos
-                          Navigator.pushReplacementNamed(context, '/login');
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/login',
+                            arguments: emailController.text,
+                          );
                         } else {
-                          // Falha no registro, exibir mensagem de erro
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  'Falha ao registrar. Verifique suas credenciais.'),
-                            ),
+                          Navigator.pushReplacementNamed(
+                            context,
+                            '/login',
+                            arguments: emailController.text,
                           );
                         }
                       } else {

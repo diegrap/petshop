@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petshop_final/bloc/manage_bloc.dart';
 import 'alimenticio.dart';
-import 'acessorio.dart';
+import '../view/acessorio.dart';
 import 'package:petshop_final/view/user_profile.dart';
 
 class Products extends StatefulWidget {
@@ -13,6 +13,7 @@ class Products extends StatefulWidget {
 class _ProductsState extends State<Products> {
   // ignore: unused_field
   int _selectedIndex = 0;
+  bool _segredo = true;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,6 +29,20 @@ class _ProductsState extends State<Products> {
 
   @override
   Widget build(BuildContext context) {
+    final String email = ModalRoute.of(context)!.settings.arguments as String;
+
+    if (_segredo) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Usuário $email logado com sucesso!'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      });
+      _segredo = false;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Produtos'),
